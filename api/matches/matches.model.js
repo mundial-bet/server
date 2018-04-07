@@ -16,6 +16,7 @@ const matchSchema = new mongoose.Schema({
     capacity: Number
   },
   date: Date,
+  group: String,
   round: {type: String, enum: ['Group', '1/8 Finals', '1/4 Finals', '1/2 Finals', 'Finals']}
 });
 

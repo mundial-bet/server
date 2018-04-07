@@ -19,7 +19,8 @@ const leagueSchema = new mongoose.Schema({
   inscription: {
     type: Number,
     default: 0
-  }
+  },
+  participants: Number
 });
 
 module.exports = mongoose.model('League', leagueSchema);

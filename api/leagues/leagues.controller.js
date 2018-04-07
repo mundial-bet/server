@@ -1,5 +1,6 @@
 mongoose = require('mongoose');
 const Leagues = require('./leagues.model');
+const UserLeagues = require('../userLeagues/userLeagues.model');
 
 exports.createLeague = function(req, res, next) {
   const { name, maxParticipants, private } = req.body;
@@ -9,7 +10,25 @@ exports.createLeague = function(req, res, next) {
   })
   newLeague.save()
   .then(league => {
-    res.status(200).json(league)
+    const newUserLeague = new UserLeagues({ user: creator, league: league._id })
+    newUserLeague.save()
+    .then(relation => {
+      res.status(200).json(league)
+    })
+  })
+  .catch(error => {
+    next(error)
+  })
+};
+
+exports.removeLeague = function(req, res, next) {
+  let league = req.params.id;
+  UserLeagues.remove({league})
+  .then(message => {
+    Leagues.remove({_id: league})
+    .then(response => {
+      res.status(200).json(response)
+    })
   })
   .catch(error => {
     next(error)

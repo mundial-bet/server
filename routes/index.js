@@ -6,7 +6,7 @@ module.exports = function(app) {
   app.use('/api/leagues', require('../api/leagues'));
   app.use('/api/matches', require('../api/matches'));
   app.use('/api/teams', require('../api/teams'));
-  // app.use('/api/userLeague', require('../api/userLeague'));
+  app.use('/api/user-league', require('../api/userLeagues'));
   // app.use('/api/userBet', require('../api/userBet'));
 
 	// catch 404
